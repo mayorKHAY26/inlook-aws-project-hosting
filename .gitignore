@@ -1,0 +1,64 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# Terraform sensitive files
+**/terraform.tfvars
+**/*.auto.tfvars
+
+# Terraform variables (sensitive)
+**/terraform.tfvars
+**/*.auto.tfvars
+
+# Environment files
+.env
+*.env
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+*.tar
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Jenkins
+jenkins_home/
+
+# Prometheus
+prometheus_data/
+
+# Grafana
+grafana_data/
+
+# Temporary files
+tmp/
+temp/
+*.bak
+*.swp

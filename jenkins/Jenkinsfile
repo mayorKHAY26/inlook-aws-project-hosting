@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "inlook"
+        AWS_REGION = "us-east-1"
+        FRONTEND_IMAGE = "inlook-frontend"
+        BACKEND_IMAGE = "inlook-backend"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Frontend Docker Image') {
+            steps {
+                sh 'docker build -t $FRONTEND_IMAGE ./app/frontend'
+            }
+        }
+
+        stage('Build Backend Docker Image') {
+            steps {
+                sh 'docker build -t $BACKEND_IMAGE ./app/backend'
+            }
+        }
+
+        stage('Test Backend Health File') {
+            steps {
+                sh 'echo "Inlook backend image built successfully"'
+            }
+        }
+
+        stage('Deploy Placeholder') {
+            steps {
+                sh 'echo "Later this stage will push to ECR and deploy Inlook to AWS"'
+            }
+        }
+    }
+}

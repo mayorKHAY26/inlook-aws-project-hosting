@@ -1,0 +1,26 @@
+{
+  "title": "Inlook Application Dashboard",
+  "uid": "inlook-application",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Inlook Backend Health",
+      "targets": [
+        {
+          "expr": "up{job=\"inlook-backend\"}",
+          "legendFormat": "Backend"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 4
+      }
+    }
+  ]
+}

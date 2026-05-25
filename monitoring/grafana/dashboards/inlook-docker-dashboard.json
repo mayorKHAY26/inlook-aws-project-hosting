@@ -1,0 +1,26 @@
+{
+  "title": "Inlook Docker Dashboard",
+  "uid": "inlook-docker",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Docker Container Status",
+      "targets": [
+        {
+          "expr": "up",
+          "legendFormat": "Container Target"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 8,
+        "h": 4
+      }
+    }
+  ]
+}

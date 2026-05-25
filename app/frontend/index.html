@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inlook Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Inlook</h1>
+  <p>Secure webmail-style portal hosted on AWS</p>
+
+  <div class="box">
+    <h2>Create Account</h2>
+    <input id="registerName" placeholder="Full Name">
+    <input id="registerEmail" placeholder="Email">
+    <input id="registerPassword" type="password" placeholder="Password">
+    <button onclick="register()">Register</button>
+  </div>
+
+  <div class="box">
+    <h2>Login</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="dashboard" class="box hidden">
+    <h2>Inlook Inbox</h2>
+    <p>You are logged in successfully.</p>
+    <ul>
+      <li>Welcome to Inlook</li>
+      <li>Your AWS-hosted portal is active</li>
+      <li>CloudWatch, GuardDuty, and Security Hub are part of this project</li>
+    </ul>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

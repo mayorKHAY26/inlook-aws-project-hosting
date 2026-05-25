@@ -1,0 +1,11 @@
+groups:
+  - name: inlook-alerts
+    rules:
+      - alert: InlookBackendDown
+        expr: up{job="inlook-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Inlook backend is down"
+          description: "Prometheus cannot reach the Inlook backend."
