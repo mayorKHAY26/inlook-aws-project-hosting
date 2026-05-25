@@ -8,7 +8,7 @@
   <h1>Inlook</h1>
   <p>Secure webmail-style portal hosted on AWS</p>
 
-  <div class="box">
+  <div class="box" id="registerBox">
     <h2>Create Account</h2>
     <input id="registerName" placeholder="Full Name">
     <input id="registerEmail" placeholder="Email">
@@ -16,24 +16,67 @@
     <button onclick="register()">Register</button>
   </div>
 
-  <div class="box">
+  <div class="box" id="loginBox">
     <h2>Login</h2>
     <input id="loginEmail" placeholder="Email">
     <input id="loginPassword" type="password" placeholder="Password">
     <button onclick="login()">Login</button>
   </div>
 
-  <div id="dashboard" class="box hidden">
-    <h2>Inlook Inbox</h2>
-    <p>You are logged in successfully.</p>
-    <ul>
-      <li>Welcome to Inlook</li>
-      <li>Your AWS-hosted portal is active</li>
-      <li>CloudWatch, GuardDuty, and Security Hub are part of this project</li>
-    </ul>
-    <button onclick="logout()">Logout</button>
+  <div id="dashboard" class="hidden mail-layout">
+    <aside class="sidebar">
+      <h2>Inlook</h2>
+      <button onclick="showSection('inbox')">Inbox</button>
+      <button onclick="showSection('sent')">Sent</button>
+      <button onclick="showSection('drafts')">Drafts</button>
+      <button onclick="showSection('compose')">Compose Mail</button>
+      <button onclick="showSection('profile')">User Profile</button>
+      <button onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="mail-content">
+      <section id="inbox" class="section">
+        <h2>Inbox</h2>
+        <div class="message">
+          <strong>Welcome to Inlook</strong>
+          <p>Your AWS-hosted mail portal is active.</p>
+        </div>
+        <div class="message">
+          <strong>Cloud Monitoring Enabled</strong>
+          <p>CloudWatch, GuardDuty, and Security Hub are part of this project.</p>
+        </div>
+      </section>
+
+      <section id="sent" class="section hidden">
+        <h2>Sent</h2>
+        <div id="sentMessages"></div>
+      </section>
+
+      <section id="drafts" class="section hidden">
+        <h2>Drafts</h2>
+        <div class="message">
+          <strong>Draft Example</strong>
+          <p>This is where saved drafts would appear.</p>
+        </div>
+      </section>
+
+      <section id="compose" class="section hidden">
+        <h2>Compose Mail</h2>
+        <input id="toEmail" placeholder="To">
+        <input id="subject" placeholder="Subject">
+        <textarea id="messageBody" placeholder="Write your message..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+      </section>
+
+      <section id="profile" class="section hidden">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> <span id="profileName"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>Role:</strong> Inlook User</p>
+      </section>
+    </main>
   </div>
 
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
