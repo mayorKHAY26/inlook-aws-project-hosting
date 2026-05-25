@@ -35,3 +35,8 @@ resource "aws_iam_instance_profile" "inlook_jenkins_instance_profile" {
   name = "${var.project_name}-jenkins-instance-profile"
   role = aws_iam_role.inlook_jenkins_role.name
 }
+
+resource "aws_iam_role_policy_attachment" "inlook_jenkins_ecs_policy" {
+  role       = aws_iam_role.inlook_jenkins_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+}
