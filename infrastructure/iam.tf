@@ -40,3 +40,8 @@ resource "aws_iam_role_policy_attachment" "inlook_jenkins_ecs_policy" {
   role       = aws_iam_role.inlook_jenkins_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
+
+resource "aws_iam_role_policy_attachment" "inlook_jenkins_elb_readonly_policy" {
+  role       = aws_iam_role.inlook_jenkins_role.name
+  policy_arn = "arn:aws:iam::aws:policy/ElasticLoadBalancingReadOnly"
+}

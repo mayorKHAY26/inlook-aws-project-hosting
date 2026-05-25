@@ -21,6 +21,12 @@ resource "aws_ecs_service" "inlook_service" {
     container_port   = 80
   }
 
+  load_balancer {
+    target_group_arn = aws_lb_target_group.inlook_backend_tg.arn
+    container_name   = "inlook-backend"
+    container_port   = 5000
+  }
+
   depends_on = [
     aws_lb_listener.inlook_http_listener,
     aws_iam_role_policy_attachment.inlook_ecs_task_execution_policy
