@@ -2,13 +2,18 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = "inlook"
-        AWS_REGION = "us-east-1"
-        FRONTEND_IMAGE = "inlook-frontend"
-        BACKEND_IMAGE = "inlook-backend"
+        AWS_REGION = 'us-east-1'
+        AWS_ACCOUNT_ID = '534315511736'
+
+        FRONTEND_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/inlook-frontend"
+        BACKEND_REPO  = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/inlook-backend"
+
+        ECS_CLUSTER = 'inlook-ecs-cluster'
+        ECS_SERVICE = 'inlook-service'
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
                 checkout scm
@@ -17,25 +22,51 @@ pipeline {
 
         stage('Build Frontend Docker Image') {
             steps {
-                sh 'docker build -t $FRONTEND_IMAGE ./app/frontend'
+                sh 'docker build -t inlook-frontend ./app/frontend'
             }
         }
 
         stage('Build Backend Docker Image') {
             steps {
-                sh 'docker build -t $BACKEND_IMAGE ./app/backend'
+                sh 'docker build -t inlook-backend ./app/backend'
             }
         }
 
-        stage('Test Backend Health File') {
+        stage('Login to Amazon ECR') {
             steps {
-                sh 'echo "Inlook backend image built successfully"'
+                sh '''
+                aws ecr get-login-password --region $AWS_REGION | \
+                docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+                '''
             }
         }
 
-        stage('Deploy Placeholder') {
+        stage('Tag Docker Images') {
             steps {
-                sh 'echo "Later this stage will push to ECR and deploy Inlook to AWS"'
+                sh '''
+                docker tag inlook-frontend:latest $FRONTEND_REPO:latest
+                docker tag inlook-backend:latest $BACKEND_REPO:latest
+                '''
+            }
+        }
+
+        stage('Push Docker Images to ECR') {
+            steps {
+                sh '''
+                docker push $FRONTEND_REPO:latest
+                docker push $BACKEND_REPO:latest
+                '''
+            }
+        }
+
+        stage('Deploy to ECS') {
+            steps {
+                sh '''
+                aws ecs update-service \
+                  --cluster $ECS_CLUSTER \
+                  --service $ECS_SERVICE \
+                  --force-new-deployment
+                '''
             }
         }
     }
