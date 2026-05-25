@@ -528,7 +528,7 @@ Planned upgrades:
 
 ---
 
-# Interview Summary
+# Project Summary
 
 This project demonstrates:
 
@@ -546,5 +546,5 @@ This project demonstrates:
 ---
 
 # Author
-
-Built as an AWS Cloud Engineering / DevOps portfolio project.
+Kolapo Omotehinse
+AWS Cloud Engineering / DevOps portfolio project.
